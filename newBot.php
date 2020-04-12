@@ -33,7 +33,6 @@
      * #__bot_limit_type - фактически таблица из https://developer.twitter.com/en/docs/basics/rate-limits
      *      limit_type
      *      hours
-     *      period
      *      limit_value
      * 
      * #__bot_limit
@@ -119,9 +118,13 @@
             if($type === false){
                 return;
             }
-            botLimitLog::deleteOld($this->id,$limit_type,$type->hours,$type->period);
+            botLimitLog::deleteOld($this->id,$limit_type,$type->hours);
             $count = botLimitLog::getCount($this->id,$limit_type);
-            botLimit::setAvailableLimit($this->id,$limit_type,$count);
+            $limit_value = $type->limit_value - $count;
+            if($limit_value < 0){
+                $limit_value = 0;
+            }
+            botLimit::setAvailableLimit($this->id,$limit_type,$limit_value);
         }
         
         public function unban(){

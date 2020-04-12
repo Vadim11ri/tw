@@ -4,7 +4,6 @@
         
         public $limit_type;
         public $hours;
-        public $period;
         public $limit_value;
         
         public static function getOne($limit_type){
@@ -19,7 +18,6 @@
                 $result = new botLimitType();
                 $result->limit_type = $botLimitTypeDb->limit_type;
                 $result->hours = $botLimitTypeDb->hours;
-                $result->period = $botLimitTypeDb->period;
                 $result->limit_value = $botLimitTypeDb->limit_value;
             }
             return $result;
