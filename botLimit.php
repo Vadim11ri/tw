@@ -37,12 +37,12 @@
             return $result;
         }
         
-        public static function getListForBot($limit_type){
+        public static function getListForBot($bot_id){
             $resultList = array();
             $db = Factory::getDBO();
             $query = 'SELECT *  
                 FROM `#__bot_limit` 
-                WHERE `limit_type` = "'.$limit_type.'"';
+                WHERE `bot_id` = "'.$bot_id.'"';
             $db->setQuery($query);
             $botLimitDbList = $db->loadObjectList();
             foreach($botLimitDbList as $botLimitDb){
